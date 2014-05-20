@@ -13,35 +13,29 @@
 
     <script src="scripts/login.js"></script>
     <script src="scripts/location.js"></script>
-    <script src="scripts/weather.js"></script>
+    <script src="scripts/company.js"></script>
+    <script src="scripts/device.js"></script>
     <script src="scripts/app.js"></script>
 </head>
 <body>
-    <!--Home View-->
-    <div id="tabstrip-home"
+    <!--Device View-->
+   <div id="tabstrip-device"
         data-role="view"
-        data-title="Home">
-        <header data-role="header">
-            <div data-role="navbar">
-                <span data-role="view-title"></span>
-                <a id="skin-change" data-role="button" data-align="right" data-click="app.changeSkin">Flat</a>
-            </div>
-        </header>
+        data-title="Devices"
+        data-model="app.deviceService.viewModel">
 
-        <h3>Welcome!</h3>
-        <p>
-            TurboTrack&trade; is for totally tracking your vehicles on land, sea, air and outer space<br><br>
-            
-        </p>
-        <div class="welcome-image"></div>
+        <ul id="DeviceList" data-role="listview" data-style="inset"
+            data-bind="source: deviceDataSource"
+            data-template="company-template" class="secondrowcolor-listview">
+        </ul>
     </div>
+     
 
     <!--Login View-->
     <div id="tabstrip-login"
         data-role="view"
         data-title="Login"
         data-model="app.loginService.viewModel">
-
         <div class="logo-image"></div>
         <div>
             <h3 data-bind="visible: isLoggedIn">Welcome, <span data-bind="    text: username"></span>!</h3>
@@ -74,7 +68,7 @@
         data-init="app.locationService.initLocation"
         data-show="app.locationService.show"
         data-hide="app.locationService.hide"
-        data-model="app.locationService.viewModel"
+        data-model="app.locationService.viewModel" 
         data-stretch="true">
 
         <div id="map-canvas" class="map" data-bind="visible: isGoogleMapsInitialized"></div>
@@ -91,39 +85,31 @@
         </div>
     </div>
 
-    <!--Weather View-->
-    <div id="tabstrip-weather"
+    <!--Company View-->
+    <div id="tabstrip-company"
         data-role="view"
-        data-title="Weather"
-        data-model="app.weatherService.viewModel">
+        data-title="Company"
+        data-model="app.companyService.viewModel">
 
-        <ul data-role="listview" data-style="inset"
-            data-bind="source: weatherDataSource"
-            data-template="bloggersTemplate" data-auto-bind="false">
+        <ul id="CompanyList" data-role="listview" data-style="inset"
+            data-bind="source: companyDataSource, events: { click: onClick }"
+            data-template="company-template" class="secondrowcolor-listview">
         </ul>
     </div>
 
-    <!--Weather forecast template-->
-    <script id="weather-forecast-template" type="text/x-kendo-tmpl">
-         <div class="w-item-template">
-            <span class="w-icon ${image}"></span>
-            <h4 class="w-date">${day}</h4>
-            <div class="w-temp">
-                <span>${highTemperature}<sup>&deg;</sup></span>
-                <span>${lowTemperature}<sup>&deg;</sup></span>
-            </div>
+    <!--Company template-->
+    <script id="company-template" type="text/x-kendo-tmpl">
+         <div >
+           ${Name} 	
+           ${ID}
+        	   
         </div>
-        
     </script>
     
-    <script id="bloggersTemplate" type="text/x-kendo-template">
- 
- 	
- 	<h2>#=data.Name#</h2>
- 	<h2>#=data.ID#</h4>
- 	</a>
- 
- </script>
+    <script id="CompanyListTemplate" type="text/x-kendo-template">
+     	<h5>#=data.Name#</h5>
+ 		<h6>#=data.ID#</h6>
+ 	</script>
 
     <!--Layout-->
     <div data-role="layout" data-id="tabstrip-layout">
@@ -137,10 +123,11 @@
         <!--Footer-->
         <div data-role="footer">
             <div data-role="tabstrip">
-                <a href="#/" data-icon="home">Home</a>
+                <a href="#tabstrip-device" data-icon="home">Device</a>
                 <a href="#tabstrip-login" data-icon="contacts">Login</a>
+                 <a href="#tabstrip-company" data-icon="search">Company</a>
                 <a href="#tabstrip-location" data-icon="globe">Location</a>
-                <a href="#tabstrip-weather" data-icon="search">History</a>
+              
             </div>
         </div>
     </div>
