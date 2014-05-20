@@ -29,9 +29,10 @@
                  companyid,
                deviceDataSource;
 
-            companyid = "123";
-            // kendoConsole.log("event :: click (" + e.item.text() + ")", false, "#mobile-listview-events");
+            //companyid = "123";
+            companyid=e.dataItem.ID;
             //navigator.notification.alert(e.item.text());
+            //navigator.notification.alert(e.dataItem.ID);
 
             kendo.data.ObservableObject.fn.init.apply(that, []);
             deviceDataSource = new kendo.data.DataSource({
@@ -47,10 +48,11 @@
                     }
                 }
             });
-
-            $("#DeviceList").data("kendoMobileListView").setDataSource(deviceDataSource);
+            
             var app = new kendo.mobile.Application();
             app.navigate("#tabstrip-device");
+            $("#DeviceList").data("kendoMobileListView").setDataSource(deviceDataSource);
+ 			
            
         }
          

@@ -47,9 +47,10 @@
                     that.set("isLoggedIn", true);
                     //navigator.notification.alert(data[0].ID + data[0].Name, function () { }, "Login Successful", 'OK');
                     
-                    $("#CompanyList").data("kendoMobileListView").setDataSource(logindataSource);
                     var app = new kendo.mobile.Application();
                     app.navigate("#tabstrip-company");
+                    $("#CompanyList").data("kendoMobileListView").setDataSource(logindataSource);
+                    
                 }
 	            if (username === "" || password === "") {
                    navigator.notification.alert("Both fields are required!",function () { }, "Login failed", 'OK');
