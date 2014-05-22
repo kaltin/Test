@@ -2,6 +2,7 @@
     var map,
         geocoder,
         LocationViewModel,
+    deger,
         app = global.app = global.app || {};
 
     LocationViewModel = kendo.data.ObservableObject.extend({
@@ -11,29 +12,32 @@
         address: "",
         isGoogleMapsInitialized: false,
 
+      
         onNavigateHome: function () {
             var that = this,
                 position;
+            
 
             that._isLoading = true;
             that.toggleLoading();
+           
 
             navigator.geolocation.getCurrentPosition(
                 function (position) {
-                    //position = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-                    position = new google.maps.LatLng(54.83475413428133,  9.348807011947656);
+                    position = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+                    //position = new google.maps.LatLng(12.0480551,-4.0236111) 
+                    //24.83475413428133,  9.348807011947656);
                     map.panTo(position);
                     that._putMarker(position);
-
+                    
+                    
                     that._isLoading = false;
                     that.toggleLoading();
                 },
                 function (error) {
                     //default map coordinates
-                    position = new google.maps.LatLng(54.83475413428133, 9.348807011947656); 
-
-
-                    map.panTo(position);
+                    position = new google.maps.LatLng(39.0480551,24.0236111); 
+                  
 
                     that._isLoading = false;
                     that.toggleLoading();
@@ -48,16 +52,17 @@
             );
         },
 
-        onSearchAddress: function () {
+        onSearchAddress: function (e) {
             var that = this;
-
+			
+            
             geocoder.geocode(
                 {
-                    'address': that.get("address")
+                    'address':that.get("address")
                 },
                 function (results, status) {
                     if (status !== google.maps.GeocoderStatus.OK) {
-                        navigator.notification.alert("Unable to find address.",
+                        navigator.notification.alert("Unable to find address. Deger:" + deger + ":",
                             function () { }, "Search failed", 'OK');
 
                         return;
@@ -91,7 +96,7 @@
     });
 
     app.locationService = {
-        initLocation: function () {
+        initLocation: function (e) {
             var mapOptions;
 
             if (typeof google === "undefined") {
@@ -105,7 +110,7 @@
                 mapTypeId: google.maps.MapTypeId.ROADMAP,
                 zoomControl: true,
                 zoomControlOptions: {
-                    position: google.maps.ControlPosition.LEFT_BOTTOM
+                position: google.maps.ControlPosition.LEFT_BOTTOM
                 },
 
                 mapTypeControl: false,
@@ -114,22 +119,43 @@
 
             map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
             geocoder = new google.maps.Geocoder();
-            app.locationService.viewModel.onNavigateHome.apply(app.locationService.viewModel, []);
+            //app.locationService.viewModel.onNavigateHome.apply(app.locationService.viewModel, []);
+            //navigator.notification.alert("app.locationservice.intilocation icinden:  " + e.view.params.deger);
+            
+           
         },
 
-        show: function () {
+        show: function (e) {
+            
             if (!app.locationService.viewModel.get("isGoogleMapsInitialized")) {
                 return;
             }
 
             //resize the map in case the orientation has been changed while showing other tab
             google.maps.event.trigger(map, "resize");
+            //position = new google.maps.LatLng(parseFloat(e.view.params.lat), e.view.params.lon);
+            //position = new google.maps.LatLng(51.519375, -0.12697); //london
+            position = new google.maps.LatLng(e.view.params.lat, e.view.params.lon);
+            map.panTo(position);
+            var marker = new google.maps.Marker({
+                position: position,
+                map: map
+                
+            });
         },
 
         hide: function () {
             //hide loading mask if user changed the tab as it is only relevant to location tab
             kendo.mobile.application.hideLoading();
         },
+
+        onShowlatlang: function (e) {
+
+            deger = e.view.params.lastValidLongitude;
+            //var lng = e.view.params.lastValidLongitude; 
+
+        },
+
 
         viewModel: new LocationViewModel()
     };

@@ -18,27 +18,7 @@
     <script src="scripts/app.js"></script>
 </head>
 <body>
-    <!--Device View-->
-   <div id="tabstrip-device"
-        data-role="view"
-        data-title="Devices"
-        data-model="app.deviceService.viewModel">
-
-        <ul id="DeviceList" data-role="listview" data-style="inset"
-            data-bind="source: deviceDataSource"
-            data-template="device-template" class="secondrowcolor-listview">
-        </ul>
-    </div>
-     
-     <!--Device template-->
-   <script id="device-template" type="text/x-kendo-tmpl">
-         <div >
-        	${description}   
-        	${simPhoneNumber}
-        	${lastEventTimeStamp}
-        </div>
-    </script>
-
+   
     <!--Login View-->
     <div id="tabstrip-login"
         data-role="view"
@@ -69,6 +49,59 @@
         </form>
     </div>
 
+    <!--Company View-->
+    <div id="tabstrip-company"
+        data-role="view"
+        data-title="Company"
+        data-model="app.companyService.viewModel">
+
+        <ul id="CompanyList" data-role="listview" data-style="inset"
+            data-bind=" source: companyDataSource, events: { click: onClick }"
+            data-template="company-template" class="secondrowcolor-listview">
+        </ul>
+    </div>
+
+    <!--Company template-->
+    <script id="company-template" type="text/x-kendo-tmpl">
+         <div>
+          <a href="\#tabstrip-device" >${Name} ${ID} </a> 
+           
+        </div>
+    </script>
+    
+    <script id="CompanyListTemplate" type="text/x-kendo-template">
+     	<h5>#=data.Name#</h5>
+ 		<h6>#=data.ID#</h6>
+ 	</script>
+
+    <!--Device View-->
+	<div id="tabstrip-device"
+        data-role="view"
+        data-title="Devices"
+        data-model="app.deviceService.viewModel">
+
+        <ul id="DeviceList" data-role="listview" data-style="inset"
+            data-bind="source: deviceDataSource, events: { click: app.locationService.onShowlatlang }"
+            data-template="device-template" class="secondrowcolor-listview"
+            >
+        </ul>
+    </div>
+     
+    <!--Device template-->
+	<script id="device-template" type="text/x-kendo-tmpl">
+         <div class="w-item-template">
+     
+            <h4 class="w-date">${description}</h4>
+            <div class="w-temp">
+                <span>${simPhoneNumber}</span>
+                <span>${lastEventTimeStamp}</span>
+       <a href="\\#tabstrip-location?lat=${lastValidLatitude}&lon=${lastValidLongitude}">${lastValidLatitude} - ${lastValidLongitude} go <a/>
+            </div>
+     
+        </a>
+        </div>
+    </script>
+
     <!--Location View-->
     <div id="tabstrip-location"
         data-role="view"
@@ -84,7 +117,7 @@
         <div id="no-map" data-bind="invisible: isGoogleMapsInitialized">
             <h3>Location requires internet connection to display the map.</h3>
         </div>
-        <div id="map-search-wrap" class="map-tools" data-bind="visible: isGoogleMapsInitialized">
+        <div id="map-search-wrap" class="map-tools" data-bind="visible: isGoogleMapsInitialized" >
             <div>
                 <button id="map-navigate-home" class="map-tools-button home" data-bind="click: onNavigateHome"></button>
                 <input id="map-address" type="search" class="map-tools-input" data-bind="value: address" placeholder="Address" />
@@ -92,31 +125,6 @@
             </div>
         </div>
     </div>
-
-    <!--Company View-->
-    <div id="tabstrip-company"
-        data-role="view"
-        data-title="Company"
-        data-model="app.companyService.viewModel">
-
-        <ul id="CompanyList" data-role="listview" data-style="inset"
-            data-bind="source: companyDataSource, events: { click: onClick }"
-            data-template="company-template" class="secondrowcolor-listview">
-        </ul>
-    </div>
-
-    <!--Company template-->
-    <script id="company-template" type="text/x-kendo-tmpl">
-         <div>
-           ${Name} 	
-           ${ID}
-        </div>
-    </script>
-    
-    <script id="CompanyListTemplate" type="text/x-kendo-template">
-     	<h5>#=data.Name#</h5>
- 		<h6>#=data.ID#</h6>
- 	</script>
 
     <!--Layout-->
     <div data-role="layout" data-id="tabstrip-layout">
@@ -139,5 +147,7 @@
             </div>
         </div>
     </div>
+
+   
 </body>
 </html>

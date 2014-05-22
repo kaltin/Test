@@ -14,8 +14,8 @@
                 username = that.get("username").trim(),
                 password = that.get("password").trim();
 				
-            	username= "kazim@ipnordic.dk";
-           	 password= "secure4Kazim";
+            	//username= "kazim@ipnordic.dk";
+           	 ///password= "secure4Kazim";
             	
             
             var logindataSource = new kendo.data.DataSource({
