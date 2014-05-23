@@ -64,7 +64,10 @@
     <!--Company template-->
     <script id="company-template" type="text/x-kendo-tmpl">
          <div>
-          <a href="\#tabstrip-device" >${Name} ${ID} </a> 
+          <a href="\#tabstrip-device" > 
+        <span>${Name}</span>
+        <span style="float:right;font-size: 50%">${ID}</span>
+          </a> 
            
         </div>
     </script>
@@ -96,10 +99,8 @@
          		   <span class=d-icon></span>
         			<span class="device-desc">${description}</span>
         			<span class="device-simnumber" >${simPhoneNumber}</span><br/>
-                    
-        			 	<span class="device-address">${address}</span>
-                 		<span class="device-lastdate">${lastEventTimeStamp}</span>
-        			 
+   			 	<span class="device-address">${address}</span>
+            		<span class="device-lastdate">${lastEventTimeStamp}</span>
              	</div>
          <a/>
         </div>

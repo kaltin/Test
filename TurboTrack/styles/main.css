@@ -104,9 +104,9 @@
 
 /*DEVICE VIEW STYLES*/
 .d-icon {
-    width: 32px;
-    height: 32px;
-    background-image: url(../styles/images/car.png);
+    width: 48px;
+    height: 48px;
+    background-image: url(../styles/images/ferrari.png);
     background-repeat: no-repeat;
     background-position: 0px 0px;
 }
