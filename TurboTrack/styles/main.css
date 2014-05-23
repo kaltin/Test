@@ -95,9 +95,44 @@
     width: 50%;
 }
 
+
+
+
 .secondrowcolor-listview > li:nth-child(2n) {
-    background-color:  #003366;
+    background-color:  #999;
 }
+
+/*DEVICE VIEW STYLES*/
+.d-icon {
+    width: 32px;
+    height: 32px;
+    background-image: url(../styles/images/car.png);
+    background-repeat: no-repeat;
+    background-position: 0px 0px;
+}
+.d-item-template > .d-icon {
+    float: left;
+}
+.d-item-template > .device-desc {
+    float:left;
+   
+}
+.d-item-template > .device-simnumber {
+    font-size : 70%;
+    float: right;
+}
+.d-item-template > .device-lastdate {
+    font-size : 50%;
+    float: right;
+}
+.d-item-template > .device-address {
+    font-size : 50%;
+    float: left;
+    width: 22em;
+    
+}
+
+
 
 /* WEATHER VIEW STYLES */
 .w-icon {

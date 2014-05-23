@@ -14,8 +14,8 @@
                 username = that.get("username").trim(),
                 password = that.get("password").trim();
 				
-            	//username= "kazim@ipnordic.dk";
-           	 ///password= "secure4Kazim";
+            	username= "kazim@ipnordic.dk";
+           	 password= "secure4Kazim";
             	
             
             var logindataSource = new kendo.data.DataSource({
@@ -38,19 +38,17 @@
             logindataSource.fetch(function(){
                 var data = this.data();
 	
-                //if (username===UserData[0].Login && password === UserData[0].Password) {
-                if (data.ID === null || data.ID==="" ) {
-             		navigator.notification.alert("Invalid Username or Password!",function () { }, "Login failed", 'OK');
-	                return;
+                //if (username===data[0].Login && password === data[0].Password) {
+                if (data.ID === null || data.ID ==="" ) {
+                    navigator.notification.alert("Invalid Username or Password!",function () { }, "Login failed", 'OK');
+	                return;  
              	}
                 else{
-                    that.set("isLoggedIn", true);
+                  that.set("isLoggedIn", true);
                     //navigator.notification.alert(data[0].ID + data[0].Name, function () { }, "Login Successful", 'OK');
-                    
                     var app = new kendo.mobile.Application();
                     app.navigate("#tabstrip-company");
-                    $("#CompanyList").data("kendoMobileListView").setDataSource(logindataSource);
-                    
+                    $("#CompanyList").data("kendoMobileListView").setDataSource(logindataSource);  
                 }
 	            if (username === "" || password === "") {
                    navigator.notification.alert("Both fields are required!",function () { }, "Login failed", 'OK');

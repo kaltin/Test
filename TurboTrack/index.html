@@ -89,16 +89,19 @@
      
     <!--Device template-->
 	<script id="device-template" type="text/x-kendo-tmpl">
-         <div class="w-item-template">
+         <div class="d-item-template">
      
-            <h4 class="w-date">${description}</h4>
-            <div class="w-temp">
-                <span>${simPhoneNumber}</span>
-                <span>${lastEventTimeStamp}</span>
-       <a href="\\#tabstrip-location?lat=${lastValidLatitude}&lon=${lastValidLongitude}">${lastValidLatitude} - ${lastValidLongitude} go <a/>
-            </div>
-     
-        </a>
+         <a href="\\#tabstrip-location?lat=${lastValidLatitude}&lon=${lastValidLongitude}">     
+             	<div class="d-item-template">
+         		   <span class=d-icon></span>
+        			<span class="device-desc">${description}</span>
+        			<span class="device-simnumber" >${simPhoneNumber}</span><br/>
+                    
+        			 	<span class="device-address">${address}</span>
+                 		<span class="device-lastdate">${lastEventTimeStamp}</span>
+        			 
+             	</div>
+         <a/>
         </div>
     </script>
 

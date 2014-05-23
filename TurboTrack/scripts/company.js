@@ -54,7 +54,6 @@
             var app = new kendo.mobile.Application();
             app.navigate("#tabstrip-device");
             $("#DeviceList").data("kendoMobileListView").setDataSource(deviceDataSource);
- 			
            
         }
          
